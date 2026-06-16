@@ -1,0 +1,245 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --border: #30363d;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --accent: #58a6ff;
+  --green: #3fb950;
+  --red: #ff4e4e;
+  --radius: 8px;
+}
+
+html, body { height: 100%; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+a { color: var(--accent); text-decoration: none; }
+
+/* App shell */
+.app { display: flex; flex-direction: column; min-height: 100vh; }
+
+.app-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.app-logo { font-size: 1.25rem; font-weight: 700; color: var(--text); }
+.app-tagline { font-size: 0.8rem; color: var(--muted); }
+
+.app-main { flex: 1; padding: 1.5rem; }
+
+/* Home layout */
+.home-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .home-layout { grid-template-columns: 1fr; }
+}
+
+/* Search bar */
+.search-bar { margin-bottom: 1rem; }
+
+.search-input {
+  width: 100%;
+  padding: 0.6rem 0.9rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.search-input:focus { border-color: var(--accent); }
+
+.source-tabs { display: flex; gap: 0.5rem; margin-top: 0.6rem; }
+
+.source-tab {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 2em;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+.source-tab:hover { color: var(--text); }
+.source-tab.active { border-color: var(--accent); color: var(--accent); }
+
+/* Results */
+.results-list { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.loading { color: var(--muted); font-size: 0.85rem; padding: 0.5rem 0; }
+
+/* Track card */
+.track-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.75rem;
+  transition: border-color 0.15s;
+}
+.track-card:hover { border-color: var(--accent); }
+
+.track-thumb { width: 44px; height: 44px; object-fit: cover; border-radius: 4px; flex-shrink: 0; }
+.track-info { flex: 1; min-width: 0; }
+.track-title { font-size: 0.875rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.track-artist { font-size: 0.78rem; color: var(--muted); }
+.track-source { font-size: 0.72rem; font-weight: 600; flex-shrink: 0; }
+
+.add-btn {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  background: none;
+  color: var(--accent);
+  font-size: 1.1rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+}
+.add-btn:hover:not(:disabled) { background: var(--accent); color: var(--bg); }
+.add-btn.added { border-color: var(--green); color: var(--green); cursor: default; }
+
+/* Playlist panel */
+.playlist-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-self: start;
+  position: sticky;
+  top: 1.5rem;
+}
+
+.playlist-name-input {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 600;
+  outline: none;
+}
+.playlist-name-input:focus { border-color: var(--accent); }
+
+.playlist-songs { display: flex; flex-direction: column; gap: 0.4rem; min-height: 60px; }
+
+.empty-state { color: var(--muted); font-size: 0.82rem; padding: 0.5rem 0; }
+
+.playlist-song {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.ps-thumb { width: 36px; height: 36px; object-fit: cover; border-radius: 3px; flex-shrink: 0; }
+.ps-info { flex: 1; min-width: 0; }
+.ps-title { font-size: 0.82rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ps-artist { font-size: 0.74rem; color: var(--muted); }
+.ps-source { font-size: 0.7rem; font-weight: 600; flex-shrink: 0; }
+
+.remove-btn {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0 4px;
+  flex-shrink: 0;
+}
+.remove-btn:hover { color: var(--red); }
+
+.save-btn {
+  width: 100%;
+  padding: 0.55rem;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.save-btn:disabled { opacity: 0.5; cursor: default; }
+.save-btn:hover:not(:disabled) { opacity: 0.85; }
+
+.share-box { display: flex; gap: 0.5rem; }
+
+.share-input {
+  flex: 1;
+  background: var(--bg);
+  border: 1px solid var(--green);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  color: var(--green);
+  font-size: 0.78rem;
+  outline: none;
+}
+
+.copy-btn {
+  background: var(--green);
+  color: var(--bg);
+  border: none;
+  border-radius: 4px;
+  padding: 0 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Shared playlist view */
+.shared-view { max-width: 680px; margin: 0 auto; }
+.shared-title { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.25rem; }
+.shared-count { color: var(--muted); font-size: 0.875rem; margin-bottom: 1.5rem; }
+.shared-songs { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.shared-song {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.65rem 0.9rem;
+  color: var(--text);
+  transition: border-color 0.15s;
+}
+.shared-song:hover { border-color: var(--accent); }
+
+.ss-thumb { width: 44px; height: 44px; object-fit: cover; border-radius: 4px; flex-shrink: 0; }
+.ss-info { flex: 1; min-width: 0; }
+.ss-title { font-size: 0.875rem; }
+.ss-artist { font-size: 0.78rem; color: var(--muted); }
+.ss-source { font-size: 0.75rem; font-weight: 600; flex-shrink: 0; }
+
+.shared-error { color: var(--muted); padding: 2rem; text-align: center; }
