@@ -12,7 +12,7 @@ const pool = mysql.createPool({
 
 const PLAYLIST_TTL_DAYS = parseInt(process.env.PLAYLIST_TTL_DAYS || '7', 10);
 
-async function cleanupOldPlaylists() {
+export async function cleanupOldPlaylists() {
   const [result] = await pool.execute(
     'DELETE FROM playlists WHERE created_at < NOW() - INTERVAL ? DAY',
     [PLAYLIST_TTL_DAYS]
