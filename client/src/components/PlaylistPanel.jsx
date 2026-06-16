@@ -47,13 +47,16 @@ export default function PlaylistPanel({ songs, onRemove, onSave, saving }) {
       </div>
 
       {!shareLink && (
-        <button
-          className="save-btn"
-          onClick={handleSave}
-          disabled={songs.length === 0 || saving}
-        >
-          {saving ? 'Saving…' : 'Save & Get Link'}
-        </button>
+        <>
+          <button
+            className="save-btn"
+            onClick={handleSave}
+            disabled={songs.length === 0 || saving}
+          >
+            {saving ? 'Saving…' : 'Save & Get Link'}
+          </button>
+          <p className="expiry-notice">Shared playlists expire after 7 days.</p>
+        </>
       )}
 
       {shareLink && (

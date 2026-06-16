@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
-import { initDb } from './src/db.js';
+import { initDb, cleanupOldPlaylists } from './src/db.js';
 import searchRouter from './src/routes/search.js';
 import playlistsRouter from './src/routes/playlists.js';
 
@@ -18,6 +18,8 @@ app.get('/health', (_, res) => res.json({ ok: true }));
 
 initDb()
   .then(() => {
+    cleanupOldPlaylists();
+    setInterval(cleanupOldPlaylists, 24 * 60 * 60 * 1000);
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   })
   .catch((err) => {

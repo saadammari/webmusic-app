@@ -77,10 +77,10 @@ server/   ← Express API (deployed to Railway)
 
 ## Deployment
 
-| Part     | Platform |
-|----------|----------|
-| Frontend | Vercel   |
-| Backend  | Railway  |
-| Database | Railway MySQL service |
+**Live:** https://webmusic-frontend.vercel.app
 
-Set `VITE_API_URL` in Vercel to your Railway backend URL. Set all server env vars in Railway's Variables tab. Do not commit `.env` files — they are gitignored.
+| Part     | Technology |
+|----------|------------|
+| Frontend | Vercel (static hosting, automatic deploys from GitHub) |
+| Backend  | Railway (Node.js container, auto-scales, runs Express API) |
+| Database | Railway MySQL (managed MySQL instance, auto-provisioned tables) |

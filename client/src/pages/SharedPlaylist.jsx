@@ -16,10 +16,17 @@ export default function SharedPlaylist() {
   if (error) return <div className="shared-error">Playlist not found.</div>;
   if (!playlist) return <div className="loading">Loading…</div>;
 
+  const ageText = (() => {
+    const days = Math.floor((Date.now() - new Date(playlist.created_at)) / 86400000);
+    if (days === 0) return 'Created today';
+    if (days === 1) return 'Created yesterday';
+    return `Created ${days} days ago`;
+  })();
+
   return (
     <div className="shared-view">
       <h1 className="shared-title">{playlist.name}</h1>
-      <p className="shared-count">{playlist.songs.length} tracks</p>
+      <p className="shared-count">{playlist.songs.length} tracks · <span className="shared-age">{ageText}</span></p>
       <div className="shared-songs">
         {playlist.songs.map((s) => (
           <a
