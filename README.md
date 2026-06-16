@@ -77,7 +77,7 @@ server/   ← Express API (deployed to Railway)
 
 ## Deployment
 
-**Live:** https://webmusic-frontend.vercel.app
+**Live:** https://webmusic-gamma.vercel.app
 
 | Part     | Technology |
 |----------|------------|
