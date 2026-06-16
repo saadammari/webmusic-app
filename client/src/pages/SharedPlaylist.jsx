@@ -17,8 +17,11 @@ export default function SharedPlaylist() {
   if (!playlist) return <div className="loading">Loading…</div>;
 
   const ageText = (() => {
-    const days = Math.floor((Date.now() - new Date(playlist.created_at)) / 86400000);
-    if (days === 0) return 'Created today';
+    const created = new Date(playlist.created_at.endsWith('Z') ? playlist.created_at : playlist.created_at + 'Z');
+    const hours = Math.floor((Date.now() - created) / 3600000);
+    if (hours < 1) return 'Created just now';
+    if (hours < 24) return `Created ${hours}h ago`;
+    const days = Math.floor(hours / 24);
     if (days === 1) return 'Created yesterday';
     return `Created ${days} days ago`;
   })();
